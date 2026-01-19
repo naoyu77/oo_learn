@@ -32,3 +32,21 @@ class BankAccount:
         if amount > 0:
             self._balance += amount
 ```
+
+**Q: なぜ@propertyを使う？メンバー変数ではダメ？**
+
+メンバー変数だと直接書き換えられてしまう:
+```python
+# メンバー変数の場合
+account.balance = -99999  # できてしまう（危険）
+
+# @propertyの場合
+account.balance = -99999  # エラーになる（安全）
+```
+
+| 方法 | 読み取り | 書き込み |
+|------|---------|---------|
+| `self.balance`（メンバー変数） | できる | できる（危険） |
+| `@property` + `self._balance` | できる | エラー（安全） |
+
+変更は`deposit()`や`withdraw()`経由のみ → バリデーションできる
